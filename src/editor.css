@@ -1,0 +1,18 @@
+.code-editor-settings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.code-editor-input {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  width: max-content;
+}
+
+.code-editor-input label {
+  font-size: 15px;
+}
+.code-editor-input span {
+  font-size: 15px;
+}
