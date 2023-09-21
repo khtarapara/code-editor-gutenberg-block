@@ -6,90 +6,9 @@ import {
 } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useRef } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-const { registerBlockType } = wp.blocks;
+import { languageOptions } from "./languageOptions";
 
-const languageOptions = [
-  { value: "abap", label: "abap" },
-  { value: "apex", label: "apex" },
-  { value: "azcli", label: "azcli" },
-  { value: "bat", label: "bat" },
-  { value: "bicep", label: "bicep" },
-  { value: "cameligo", label: "cameligo" },
-  { value: "clojure", label: "clojure" },
-  { value: "coffee", label: "coffee" },
-  { value: "cpp", label: "cpp" },
-  { value: "csp", label: "csp" },
-  { value: "css", label: "css" },
-  { value: "cypher", label: "cypher" },
-  { value: "dart", label: "dart" },
-  { value: "dockerfile", label: "dockerfile" },
-  { value: "ecl", label: "ecl" },
-  { value: "elixir", label: "elixir" },
-  { value: "flow9", label: "flow9" },
-  { value: "freemarker2", label: "freemarker2" },
-  { value: "go", label: "go" },
-  { value: "graphql", label: "graphql" },
-  { value: "handlebars", label: "handlebars" },
-  { value: "hcl", label: "hcl" },
-  { value: "html", label: "html" },
-  { value: "ini", label: "ini" },
-  { value: "java", label: "java" },
-  { value: "javascript", label: "javascript" },
-  { value: "kotlin", label: "kotlin" },
-  { value: "less", label: "less" },
-  { value: "feat", label: "feat" },
-  { value: "lexon", label: "lexon" },
-  { value: "liquid", label: "liquid" },
-  { value: "lua", label: "lua" },
-  { value: "m3", label: "m3" },
-  { value: "markdown", label: "markdown" },
-  { value: "mdx", label: "mdx" },
-  { value: "mips", label: "mips" },
-  { value: "msdax", label: "msdax" },
-  { value: "mysql", label: "mysql" },
-  { value: "objective", label: "objective" },
-  { value: "c", label: "c" },
-  { value: "pascal", label: "pascal" },
-  { value: "pascaligo", label: "pascaligo" },
-  { value: "perl", label: "perl" },
-  { value: "pgsql", label: "pgsql" },
-  { value: "pla", label: "pla" },
-  { value: "postiats", label: "postiats" },
-  { value: "powerquery", label: "powerquery" },
-  { value: "powershell", label: "powershell" },
-  { value: "protobuf", label: "protobuf" },
-  { value: "pug", label: "pug" },
-  { value: "python", label: "python" },
-  { value: "qsharp", label: "qsharp" },
-  { value: "r", label: "r" },
-  { value: "razor", label: "razor" },
-  { value: "redis", label: "redis" },
-  { value: "redshift", label: "redshift" },
-  { value: "restructuredtext", label: "restructuredtext" },
-  { value: "ruby", label: "ruby" },
-  { value: "rust", label: "rust" },
-  { value: "sb", label: "sb" },
-  { value: "scala", label: "scala" },
-  { value: "scheme", label: "scheme" },
-  { value: "scss", label: "scss" },
-  { value: "feat", label: "feat" },
-  { value: "shell", label: "shell" },
-  { value: "solidity", label: "solidity" },
-  { value: "sophia", label: "sophia" },
-  { value: "sparql", label: "sparql" },
-  { value: "sql", label: "sql" },
-  { value: "st", label: "st" },
-  { value: "swift", label: "swift" },
-  { value: "systemverilog", label: "systemverilog" },
-  { value: "tcl", label: "tcl" },
-  { value: "test", label: "test" },
-  { value: "twig", label: "twig" },
-  { value: "typescript", label: "typescript" },
-  { value: "vb", label: "vb" },
-  { value: "wgsl", label: "wgsl" },
-  { value: "xml", label: "xml" },
-  { value: "yaml", label: "yaml" },
-];
+const { registerBlockType } = wp.blocks;
 
 registerBlockType("code-editor/code-editor", {
   title: "Code Editor",
@@ -109,6 +28,7 @@ registerBlockType("code-editor/code-editor", {
       default: "",
     },
   },
+
   edit: ({ className, attributes, setAttributes }) => {
     const editorRef = useRef(null);
 
@@ -169,9 +89,11 @@ registerBlockType("code-editor/code-editor", {
       </div>
     );
   },
+
   save: ({ attributes }) => {
     const codeLines = attributes.code.split("\n");
     const maxLineNumber = String(codeLines.length).length;
+
     return (
       <div className="code-block-container">
         <table cellSpacing={0} cellPadding={0} className="code-editor-table">
